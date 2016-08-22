@@ -7,4 +7,5 @@
 /build
 /captures
 .idea
-
+autoformatedittext/installv1.gradle
+autoformatedittext/bintrayv1.gradle

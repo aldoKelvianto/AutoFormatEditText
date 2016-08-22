@@ -1,5 +1,29 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'AutoFormatEditText'
+    bintrayName = 'autoformatedittext'
+
+    publishedGroupId = 'com.aldoapps'
+    libraryName = 'AutoFormatEditText'
+    artifact = 'autoformatedittext'
+
+    libraryDescription = 'Android Library for auto-formatting money value on edit text '
+
+    siteUrl = 'https://github.com/aldoKelvianto/AutoFormatEditText'
+    gitUrl = 'https://github.com/aldoKelvianto/AutoFormatEditText.git'
+
+    libraryVersion = '0.9.1'
+
+    developerId = 'aldokelvianto'
+    developerName = 'Aldo Kelvianto Wachyudi'
+    developerEmail = 'aldokelvianto@yahoo.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
@@ -8,7 +32,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "0.9.1"
     }
     buildTypes {
         release {
@@ -23,3 +47,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
 }
+
+apply from: 'installv1.gradle'
+apply from: 'bintrayv1.gradle'
