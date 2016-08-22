@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
 ext {
-    bintrayRepo = 'AutoFormatEditText'
+    bintrayRepo = 'autoformatedittext'
     bintrayName = 'autoformatedittext'
 
     publishedGroupId = 'com.aldoapps'
-    libraryName = 'AutoFormatEditText'
+    libraryName = 'autoformatedittext'
     artifact = 'autoformatedittext'
 
     libraryDescription = 'Android Library for auto-formatting money value on edit text '
