@@ -18,3 +18,7 @@ You may find this library useful for:
 
 Demo:
 // TODO:YouTube link here
+
+Usage:
+add this on your gradle
+compile 'com.aldoapps:autoformatedittext:0.9.1'
