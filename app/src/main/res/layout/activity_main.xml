@@ -35,6 +35,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         autoformat:isDecimal="true"
+        android:hint="Decimal value with maxLength (10)"
+        android:layout_marginTop="8dp"
+        android:maxLength="10"/>
+
+    <com.aldoapps.autoformatedittext.AutoFormatEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        autoformat:isDecimal="false"
+        android:hint="Non-decimal value with maxLength (7)"
+        android:layout_marginTop="8dp"
+        android:maxLength="7"/>
+
+    <com.aldoapps.autoformatedittext.AutoFormatEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        autoformat:isDecimal="true"
         android:text="1545001.50"
         android:layout_marginTop="8dp"/>
 

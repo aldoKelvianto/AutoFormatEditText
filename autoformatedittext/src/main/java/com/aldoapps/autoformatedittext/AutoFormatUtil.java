@@ -27,13 +27,13 @@ public class AutoFormatUtil {
         return input.replaceAll("\\D+", "");
     }
 
-    public static String formatWithoutDecimal(double value) {
+    public static String formatToStringWithoutDecimal(double value) {
         NumberFormat formatter = new DecimalFormat(FORMAT_NO_DECIMAL);
         return formatter.format(value);
     }
 
-    public static String formatWithoutDecimal(String value) {
-        return formatWithoutDecimal(Double.parseDouble(value));
+    public static String formatToStringWithoutDecimal(String value) {
+        return formatToStringWithoutDecimal(Double.parseDouble(value));
     }
 
     public static String formatWithDecimal(String price) {

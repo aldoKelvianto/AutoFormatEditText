@@ -16,11 +16,11 @@ public class AutoFormatEditText extends EditText {
 
     private static final int MAX_LENGTH = 19;
 
-    private int prevCommaAmount = 0;
+    private int prevCommaAmount;
 
-    private boolean isFormatting = false;
+    private boolean isFormatting;
 
-    private boolean isDecimal = false;
+    private boolean isDecimal;
 
     public AutoFormatEditText(Context context) {
         super(context);
@@ -42,15 +42,27 @@ public class AutoFormatEditText extends EditText {
     }
 
     private void initialize(AttributeSet attrs) {
-        setInputFilter();
+        setInputFilter(attrs);
         obtainAttributes(attrs);
         setSoftInputKeyboard();
     }
 
-    private void setInputFilter() {
+    private void setInputFilter(AttributeSet attrs) {
+        int maxLength = MAX_LENGTH;
+        if (attrs != null){
+            int[] maxLengthAttrs = { android.R.attr.maxLength };
+            TypedArray typedArrays = getContext()
+                .obtainStyledAttributes(attrs, maxLengthAttrs);
+            try{
+                maxLength = typedArrays.getInteger(0, MAX_LENGTH);
+            }finally {
+                typedArrays.recycle();
+            }
+        }
+
         // limit maximum length for input number
         InputFilter[] inputFilterArray = new InputFilter[1];
-        inputFilterArray[0] = new InputFilter.LengthFilter(MAX_LENGTH);
+        inputFilterArray[0] = new InputFilter.LengthFilter(maxLength);
         setFilters(inputFilterArray);
     }
 
@@ -134,7 +146,7 @@ public class AutoFormatEditText extends EditText {
                 }
 
                 // only format the non-decimal value
-                result = AutoFormatUtil.formatWithoutDecimal(nonDecimal);
+                result = AutoFormatUtil.formatToStringWithoutDecimal(nonDecimal);
 
                 sbResult
                     .append(result)
