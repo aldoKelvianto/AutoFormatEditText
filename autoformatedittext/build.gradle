@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/aldoKelvianto/AutoFormatEditText'
     gitUrl = 'https://github.com/aldoKelvianto/AutoFormatEditText.git'
 
-    libraryVersion = '0.9.1'
+    libraryVersion = '0.9.3'
 
     developerId = 'aldokelvianto'
     developerName = 'Aldo Kelvianto Wachyudi'
@@ -32,7 +32,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 24
         versionCode 1
-        versionName "0.9.1"
+        versionName "0.9.3"
     }
     buildTypes {
         release {
@@ -45,7 +45,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.0'
 }
 
 apply from: 'installv1.gradle'
