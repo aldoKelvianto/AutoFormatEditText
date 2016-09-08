@@ -1,4 +1,4 @@
-<a href="http://www.methodscount.com/?lib=com.aldoapps%3Aautoformatedittext%3A0.9.2"><img src="https://img.shields.io/badge/Methods and size-core: 56 | deps: 16982 | 19 KB-e91e63.svg"/></a>[![License](https://img.shields.io/github/license/pluscubed/recycler-fast-scroll.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+<a href="http://www.methodscount.com/?lib=com.aldoapps%3Aautoformatedittext%3A0.9.2"><img src="https://img.shields.io/badge/Methods and size-core: 56 | deps: 16982 | 19 KB-e91e63.svg"/></a> [![License](https://img.shields.io/github/license/pluscubed/recycler-fast-scroll.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 #Summary:
 I made this library with single purpose, to auto format number while user type arbitrary number.
@@ -9,7 +9,7 @@ For example:
 While this is easy to achieve using simple format, I find it challenging when you involve user interaction (on EditText), especially after inserting or deleting a text. With this library user can type money on EditText without worrying it will not incorrectly formatted.
 
 #Demo:
-<iframe width="560" height="315" src="https://www.youtube.com/embed/8Ef79UqwHfk" frameborder="0" allowfullscreen></iframe>
+[![AutoFormat in Action](http://img.youtube.com/vi/8Ef79UqwHfk/0.jpg)](http://www.youtube.com/watch?v=8Ef79UqwHfk)
 
 #Usage:
 add this on your app level gradle
