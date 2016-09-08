@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:autoformat="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -20,21 +20,21 @@
     <com.aldoapps.autoformatedittext.AutoFormatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        autoformat:isDecimal="true"
+        app:isDecimal="true"
         android:hint="Type some money here (decimal)"
         android:layout_marginTop="8dp"/>
 
     <com.aldoapps.autoformatedittext.AutoFormatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        autoformat:isDecimal="false"
+        app:isDecimal="false"
         android:hint="Type some money here (no decimal)"
         android:layout_marginTop="8dp"/>
 
     <com.aldoapps.autoformatedittext.AutoFormatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        autoformat:isDecimal="true"
+        app:isDecimal="true"
         android:hint="Decimal value with maxLength (10)"
         android:layout_marginTop="8dp"
         android:maxLength="10"/>
@@ -42,7 +42,7 @@
     <com.aldoapps.autoformatedittext.AutoFormatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        autoformat:isDecimal="false"
+        app:isDecimal="false"
         android:hint="Non-decimal value with maxLength (7)"
         android:layout_marginTop="8dp"
         android:maxLength="7"/>
@@ -50,14 +50,14 @@
     <com.aldoapps.autoformatedittext.AutoFormatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        autoformat:isDecimal="true"
+        app:isDecimal="true"
         android:text="1545001.50"
         android:layout_marginTop="8dp"/>
 
     <com.aldoapps.autoformatedittext.AutoFormatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        autoformat:isDecimal="false"
+        app:isDecimal="false"
         android:text="7000234000765"
         android:layout_marginTop="8dp"/>
 </LinearLayout>
