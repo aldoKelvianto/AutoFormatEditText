@@ -1,3 +1,5 @@
+<a href="http://www.methodscount.com/?lib=com.aldoapps%3Aautoformatedittext%3A0.9.2"><img src="https://img.shields.io/badge/Methods and size-core: 56 | deps: 16982 | 19 KB-e91e63.svg"/></a>
+
 #Summary:
 I made this library with single purpose, to auto format number on the go.
 For example:
@@ -22,4 +24,4 @@ While this is easy to achieve using simple format, I find it challenging when yo
 
 #Usage:
 add this on your gradle
-compile 'com.aldoapps:autoformatedittext:0.9.1'
+compile 'com.aldoapps:autoformatedittext:0.9.3'
