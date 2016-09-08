@@ -1,4 +1,4 @@
-<a href="http://www.methodscount.com/?lib=com.aldoapps%3Aautoformatedittext%3A0.9.2"><img src="https://img.shields.io/badge/Methods and size-core: 56 | deps: 16982 | 19 KB-e91e63.svg"/></a> [![License](https://img.shields.io/github/license/pluscubed/recycler-fast-scroll.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AutoFormatEditText-green.svg?style=true)](https://android-arsenal.com/details/1/4312) <a href="http://www.methodscount.com/?lib=com.aldoapps%3Aautoformatedittext%3A0.9.2"><img src="https://img.shields.io/badge/Methods and size-core: 56 | deps: 16982 | 19 KB-e91e63.svg"/></a> [![License](https://img.shields.io/github/license/pluscubed/recycler-fast-scroll.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 #Summary:
 I made this library with single purpose, to auto format number while user type arbitrary number.
