@@ -16,6 +16,10 @@ public class AutoFormatEditText extends EditText {
 
     private static final int MAX_LENGTH = 19;
 
+    private static final int ACTION_DELETE = 0;
+
+    private static final int ACTION_INSERT = 1;
+
     private int prevCommaAmount;
 
     private boolean isFormatting;
@@ -49,13 +53,13 @@ public class AutoFormatEditText extends EditText {
 
     private void setInputFilter(AttributeSet attrs) {
         int maxLength = MAX_LENGTH;
-        if (attrs != null){
-            int[] maxLengthAttrs = { android.R.attr.maxLength };
+        if (attrs != null) {
+            int[] maxLengthAttrs = {android.R.attr.maxLength};
             TypedArray typedArrays = getContext()
                 .obtainStyledAttributes(attrs, maxLengthAttrs);
-            try{
+            try {
                 maxLength = typedArrays.getInteger(0, MAX_LENGTH);
-            }finally {
+            } finally {
                 typedArrays.recycle();
             }
         }
@@ -97,15 +101,16 @@ public class AutoFormatEditText extends EditText {
         }
 
         if (s.length() > 0) {
+            isFormatting = true;
             formatInput(s, start, lengthAfter);
         }
 
         isFormatting = false;
     }
 
-    private void formatInput(CharSequence s, int start, int count) {
-        isFormatting = true;
-
+    // action == 0 indicates users is deleting a text
+    // action == 1 indicates users is entering a text
+    private void formatInput(CharSequence s, int start, int action) {
         StringBuilder sbResult = new StringBuilder();
         String result;
         int newStart = start;
@@ -161,37 +166,42 @@ public class AutoFormatEditText extends EditText {
                 sbResult.append(result);
             }
 
-            // count == 0 indicates users is deleting a text
-            // count == 1 indicates users is entering a text
-            newStart += ((count == 0) ? 0 : 1);
+            newStart += ((action == ACTION_DELETE) ? 0 : 1);
 
             // calculate comma amount in edit text
-            commaAmount += AutoFormatUtil.getCharOccurance(result, ',');
+            commaAmount += AutoFormatUtil.getCommaOccurrence(result);
 
             // flag to mark whether new comma is added / removed
             if (commaAmount >= 1 && prevCommaAmount != commaAmount) {
-                newStart += ((count == 0) ? -1 : 1);
+                newStart += ((action == ACTION_DELETE) ? -1 : 1);
                 prevCommaAmount = commaAmount;
             }
 
             // case when deleting without comma
-            if (commaAmount == 0 && count == 0 && prevCommaAmount != commaAmount) {
+            if (commaAmount == 0 && action == ACTION_DELETE && prevCommaAmount != commaAmount) {
                 newStart -= 1;
                 prevCommaAmount = commaAmount;
             }
 
             // case when deleting without dots
-            if (count == 0 && !sbResult.toString()
-                .contains(".") && prevCommaAmount != commaAmount) {
+            if (action == ACTION_DELETE && !sbResult.toString().contains(".")
+                && prevCommaAmount != commaAmount) {
                 newStart = start;
                 prevCommaAmount = commaAmount;
+            }
+
+            int resultLength = sbResult.toString().length();
+
+            // case when dots become comma and vice versa.
+            if (action == ACTION_INSERT && commaAmount == 0 && sbResult.toString().contains(".")) {
+                newStart = start;
             }
 
             setText(sbResult.toString());
 
             // ensure newStart is within result length
-            if (newStart > sbResult.toString().length()) {
-                newStart = sbResult.toString().length();
+            if (newStart > resultLength) {
+                newStart = resultLength;
             } else if (newStart < 0) {
                 newStart = 0;
             }
