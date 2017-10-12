@@ -102,34 +102,41 @@ public class AutoFormatEditText extends EditText {
 
         if (s.length() > 0) {
             isFormatting = true;
-            formatInput(s, start, lengthAfter);
+            formatInput(s.toString(), start, lengthAfter);
         }
 
         isFormatting = false;
     }
 
-    // action == 0 indicates users is deleting a text
-    // action == 1 indicates users is entering a text
-    private void formatInput(CharSequence s, int start, int action) {
+
+    /**
+     * This is the main method which makes use of addNum method.
+     *
+     * @param input  an input text.
+     * @param start  start of a text.
+     * @param action delete or insert(0 == Delete and 1 == Insert) text.
+     * @return Nothing.
+     */
+    private void formatInput(String input, int start, int action) {
         StringBuilder sbResult = new StringBuilder();
         String result;
         int newStart = start;
 
         try {
             // Extract value without its comma
-            String digitAndDotText = s.toString().replace(",", "");
+            String digitAndDotText = input.replace(",", "");
             int commaAmount = 0;
 
             // if user press . turn it into 0.
-            if (s.toString().startsWith(".") && s.length() == 1) {
+            if (input.startsWith(".") && input.length() == 1) {
                 setText("0.");
                 setSelection(getText().toString().length());
                 return;
             }
 
             // if user press . when number already exist turns it into comma
-            if (s.toString().startsWith(".") && s.length() > 1) {
-                StringTokenizer st = new StringTokenizer(s.toString());
+            if (input.startsWith(".") && input.length() > 1) {
+                StringTokenizer st = new StringTokenizer(input);
                 String afterDot = st.nextToken(".");
                 setText("0." + AutoFormatUtil.extractDigits(afterDot));
                 setSelection(2);
