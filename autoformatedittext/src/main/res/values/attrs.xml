@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="AutoFormatEditText">
         <attr name="isDecimal" format="boolean"/>
+        <attr name="useComma" format="boolean" />
     </declare-styleable>
 </resources>
