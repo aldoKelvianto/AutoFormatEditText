@@ -37,7 +37,11 @@ public class NewAutoFormatUtil {
     }
 
     private static String formatWithoutDecimal(double value) {
-        NumberFormat formatter = new DecimalFormat(FORMAT_NO_DECIMAL, getDecimalFormat());
+        return formatWithoutDecimal(value, getDecimalFormat());
+    }
+
+    private static String formatWithoutDecimal(double value, DecimalFormatSymbols symbols) {
+        NumberFormat formatter = new DecimalFormat(FORMAT_NO_DECIMAL, symbols);
         return formatter.format(value);
     }
 
@@ -46,11 +50,11 @@ public class NewAutoFormatUtil {
     }
 
     static String formatWithDecimal(String price) {
-        return formatWithDecimal(Double.parseDouble(price));
+        return formatWithDecimal(Double.parseDouble(price), getDecimalFormat());
     }
 
-    private static String formatWithDecimal(double price) {
-        NumberFormat formatter = new DecimalFormat(FORMAT_WITH_DECIMAL, getDecimalFormat());
+    private static String formatWithDecimal(double price, DecimalFormatSymbols symbols) {
+        NumberFormat formatter = new DecimalFormat(FORMAT_WITH_DECIMAL, symbols);
         formatter.setMaximumFractionDigits(Integer.MAX_VALUE);
         return formatter.format(price);
     }

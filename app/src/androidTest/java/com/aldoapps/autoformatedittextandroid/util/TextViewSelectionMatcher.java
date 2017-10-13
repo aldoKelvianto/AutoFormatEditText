@@ -1,4 +1,4 @@
-package com.aldoapps.autoformatedittextandroid;
+package com.aldoapps.autoformatedittextandroid.util;
 
 import android.support.test.espresso.matcher.BoundedMatcher;
 import android.view.View;

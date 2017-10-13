@@ -5,34 +5,35 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class CurrencyWithCommaDelimiterTest {
+public class CurrencyWithDotGroupSeparatorTest {
 
     @Before
     public void setup() {
-        CurrencyLocale.getInstance().useCountryWithCommaDelimiter();
+        CurrencyLocale.getInstance().useLocaleWithDotGroupSeparator();
     }
 
     @Test
-    public void withCommaDelimiter_testDecimal() throws Exception {
+    public void testNoDecimal() throws Exception {
+        String moneyNoDecimal = "15000000";
+
+        String result1 = NewAutoFormatUtil.formatWithoutDecimal(moneyNoDecimal);
+        assertEquals("15.000.000", result1);
+    }
+
+    @Test
+    public void testDecimal() throws Exception {
         String moneyWithTwoDecimal = "15000000.42";
         String moneyWithThreeDecimal = "15000000.999";
         String moneyWithManyDecimal = "15000000.889989";
 
         String result1 = NewAutoFormatUtil.formatWithDecimal(moneyWithTwoDecimal);
-        assertEquals("15,000,000.42", result1);
+        assertEquals("15.000.000,42", result1);
 
         String result2 = NewAutoFormatUtil.formatWithDecimal(moneyWithThreeDecimal);
-        assertEquals("15,000,000.999", result2);
+        assertEquals("15.000.000,999", result2);
 
         String result3 = NewAutoFormatUtil.formatWithDecimal(moneyWithManyDecimal);
-        assertEquals("15,000,000.889989", result3);
+        assertEquals("15.000.000,889989", result3);
     }
 
-    @Test
-    public void withCommaDelimiter_testNoDecimal() throws Exception {
-        String moneyNoDecimal = "15000000";
-
-        String result1 = NewAutoFormatUtil.formatWithoutDecimal(moneyNoDecimal);
-        assertEquals("15,000,000", result1);
-    }
 }

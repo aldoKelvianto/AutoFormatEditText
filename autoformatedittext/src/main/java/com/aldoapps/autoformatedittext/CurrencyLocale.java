@@ -22,11 +22,11 @@ public class CurrencyLocale {
         return locale;
     }
 
-    public void useCountryWithCommaDelimiter() {
+    public void useLocaleWithCommaGroupSeparator() {
         locale = Locale.US;
     }
 
-    public void useCountryWithDotDelimiter() {
+    public void useLocaleWithDotGroupSeparator() {
         locale = Locale.GERMANY;
     }
 
