@@ -5,9 +5,8 @@ import android.content.res.TypedArray;
 import android.text.InputFilter;
 import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.EditText;
-
-import java.util.StringTokenizer;
 
 /**
  * Created by aldo on 21/08/16.
@@ -58,7 +57,7 @@ public class NewAutoFormatEditText extends EditText {
         if (attrs != null) {
             int[] maxLengthAttrs = {android.R.attr.maxLength};
             TypedArray typedArrays = getContext()
-                .obtainStyledAttributes(attrs, maxLengthAttrs);
+                    .obtainStyledAttributes(attrs, maxLengthAttrs);
             try {
                 maxLength = typedArrays.getInteger(0, MAX_LENGTH);
             } finally {
@@ -75,7 +74,7 @@ public class NewAutoFormatEditText extends EditText {
     private void obtainAttributes(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray typedArrays = getContext()
-                .obtainStyledAttributes(attrs, R.styleable.AutoFormatEditText);
+                    .obtainStyledAttributes(attrs, R.styleable.AutoFormatEditText);
 
             try {
                 isDecimal = typedArrays.getBoolean(R.styleable.AutoFormatEditText_isDecimal, false);
@@ -91,7 +90,7 @@ public class NewAutoFormatEditText extends EditText {
     }
 
     private void setSoftInputKeyboard() {
-        setKeyListener(new DigitsKeyListener(false, isDecimal));
+//        setKeyListener(new DigitsKeyListener(false, isDecimal));
     }
 
     public void updateSoftInputKeyboard(boolean isDecimal) {
@@ -99,6 +98,13 @@ public class NewAutoFormatEditText extends EditText {
         setSoftInputKeyboard();
         invalidate();
         requestLayout();
+    }
+
+    @Override
+    protected void onSelectionChanged(int selStart, int selEnd) {
+        super.onSelectionChanged(selStart, selEnd);
+        Log.d("asdf", "sel start: " + getSelectionStart());
+        Log.d("asdf", "sel end: " + getSelectionEnd());
     }
 
     @Override
@@ -111,20 +117,13 @@ public class NewAutoFormatEditText extends EditText {
         String input = s.toString();
 
         int textLength = s.length();
-        if (textLength >= 0 && textLength < 3) {
-
-            // if user press . turn it into 0.
-            if (input.startsWith(getDecimalSeparator()) && textLength == 1) {
-                String result = "0" + getDecimalSeparator();
-                setText(result);
-                return;
-            }
-
+        // if user press . turn it into 0.
+        if (input.startsWith(getDecimalSeparator()) && textLength == 1) {
+            String result = "0" + getDecimalSeparator();
+            setText(result);
+            setSelection(2);
+            return;
         }
-
-        if (s.length() > 2) {
-        }
-
 
         isFormatting = false;
     }
