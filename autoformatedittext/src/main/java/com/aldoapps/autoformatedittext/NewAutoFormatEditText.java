@@ -50,12 +50,7 @@ public class NewAutoFormatEditText extends EditText {
     private void initialize(AttributeSet attrs) {
         setMaxLengthFilter(attrs);
         obtainAttributes(attrs);
-        initDelimiter();
         setSoftInputKeyboard();
-    }
-
-    private void initDelimiter() {
-        char delimiter = useComma ? ',' : '.';
     }
 
     private void setMaxLengthFilter(AttributeSet attrs) {
@@ -91,6 +86,10 @@ public class NewAutoFormatEditText extends EditText {
         }
     }
 
+    private String getDecimalSeparator() {
+        return useComma ? "," : ".";
+    }
+
     private void setSoftInputKeyboard() {
         setKeyListener(new DigitsKeyListener(false, isDecimal));
     }
@@ -113,14 +112,14 @@ public class NewAutoFormatEditText extends EditText {
 
         int textLength = s.length();
         if (textLength >= 0 && textLength < 3) {
-            // if user press . when number already exist turns it into comma
-            if (input.startsWith(".") && input.length() > 1) {
-                StringTokenizer st = new StringTokenizer(input);
-                String afterDot = st.nextToken(".");
-                setText("0." + AutoFormatUtil.extractDigits(afterDot));
-                setSelection(2);
+
+            // if user press . turn it into 0.
+            if (input.startsWith(getDecimalSeparator()) && textLength == 1) {
+                String result = "0" + getDecimalSeparator();
+                setText(result);
                 return;
             }
+
         }
 
         if (s.length() > 2) {

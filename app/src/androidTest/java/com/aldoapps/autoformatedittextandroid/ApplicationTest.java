@@ -1,14 +1,31 @@
 package com.aldoapps.autoformatedittextandroid;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import android.support.test.espresso.assertion.ViewAssertions;
+import android.support.test.espresso.matcher.ViewMatchers;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+import static android.support.test.espresso.Espresso.onView;
 
 /**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
+ * Instrumentation test, which will execute on an Android device.
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ApplicationTest extends ApplicationTestCase<Application> {
+@RunWith(AndroidJUnit4.class)
+public class ApplicationTest {
 
-    public ApplicationTest() {
-        super(Application.class);
+    @Rule
+    public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
+
+    @Test
+    public void textViewTest() throws Exception {
+        onView(ViewMatchers.withId(R.id.tv_description))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 }
+
