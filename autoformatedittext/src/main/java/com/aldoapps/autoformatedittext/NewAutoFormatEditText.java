@@ -3,6 +3,7 @@ package com.aldoapps.autoformatedittext;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -77,8 +78,8 @@ public class NewAutoFormatEditText extends EditText {
                     .obtainStyledAttributes(attrs, R.styleable.AutoFormatEditText);
 
             try {
-                isDecimal = typedArrays.getBoolean(R.styleable.AutoFormatEditText_isDecimal, false);
-                useComma = typedArrays.getBoolean(R.styleable.AutoFormatEditText_isDecimal, false);
+                isDecimal = typedArrays.getBoolean(R.styleable.AutoFormatEditText_useDecimal, false);
+                useComma = typedArrays.getBoolean(R.styleable.AutoFormatEditText_useComma, false);
             } finally {
                 typedArrays.recycle();
             }
@@ -86,11 +87,19 @@ public class NewAutoFormatEditText extends EditText {
     }
 
     private String getDecimalSeparator() {
+        return useComma ? "." : ",";
+    }
+
+    private String getGroupSeparator() {
         return useComma ? "," : ".";
     }
 
     private void setSoftInputKeyboard() {
-//        setKeyListener(new DigitsKeyListener(false, isDecimal));
+        if (isDecimal || useComma) {
+            setKeyListener(DigitsKeyListener.getInstance("0123456789.,"));
+        } else {
+            setInputType(InputType.TYPE_CLASS_NUMBER);
+        }
     }
 
     public void updateSoftInputKeyboard(boolean isDecimal) {
@@ -103,28 +112,11 @@ public class NewAutoFormatEditText extends EditText {
     @Override
     protected void onSelectionChanged(int selStart, int selEnd) {
         super.onSelectionChanged(selStart, selEnd);
-        Log.d("asdf", "sel start: " + getSelectionStart());
-        Log.d("asdf", "sel end: " + getSelectionEnd());
+        Log.d("asdf", "start: " + selStart + " end : " + selEnd);
     }
 
     @Override
     protected void onTextChanged(CharSequence s, int start, int lengthBefore, int lengthAfter) {
-        if (isFormatting) {
-            return;
-        }
 
-        isFormatting = true;
-        String input = s.toString();
-
-        int textLength = s.length();
-        // if user press . turn it into 0.
-        if (input.startsWith(getDecimalSeparator()) && textLength == 1) {
-            String result = "0" + getDecimalSeparator();
-            setText(result);
-            setSelection(2);
-            return;
-        }
-
-        isFormatting = false;
     }
 }

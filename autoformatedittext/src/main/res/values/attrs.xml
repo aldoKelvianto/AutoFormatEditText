@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="AutoFormatEditText">
-        <attr name="isDecimal" format="boolean"/>
+        <attr name="useDecimal" format="boolean"/>
         <attr name="useComma" format="boolean" />
     </declare-styleable>
 </resources>

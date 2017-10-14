@@ -24,7 +24,7 @@ public class AutoFormatEditText extends EditText {
 
     private boolean isFormatting;
 
-    private boolean isDecimal;
+    private boolean useDecimal;
 
     public AutoFormatEditText(Context context) {
         super(context);
@@ -76,7 +76,7 @@ public class AutoFormatEditText extends EditText {
                 .obtainStyledAttributes(attrs, R.styleable.AutoFormatEditText);
 
             try {
-                isDecimal = typedArrays.getBoolean(R.styleable.AutoFormatEditText_isDecimal, false);
+                useDecimal = typedArrays.getBoolean(R.styleable.AutoFormatEditText_useDecimal, false);
             } finally {
                 typedArrays.recycle();
             }
@@ -84,11 +84,11 @@ public class AutoFormatEditText extends EditText {
     }
 
     private void setSoftInputKeyboard() {
-        setKeyListener(new DigitsKeyListener(false, isDecimal));
+        setKeyListener(new DigitsKeyListener(false, useDecimal));
     }
 
-    public void updateSoftInputKeyboard(boolean isDecimal) {
-        this.isDecimal = isDecimal;
+    public void updateSoftInputKeyboard(boolean useDecimal) {
+        this.useDecimal = useDecimal;
         setSoftInputKeyboard();
         invalidate();
         requestLayout();
@@ -123,10 +123,6 @@ public class AutoFormatEditText extends EditText {
         int newStart = start;
 
         try {
-            // Extract value without its comma
-            String digitAndDotText = input.replace(",", "");
-            int commaAmount = 0;
-
             // if user press . turn it into 0.
             if (input.startsWith(".") && input.length() == 1) {
                 setText("0.");
@@ -143,6 +139,11 @@ public class AutoFormatEditText extends EditText {
                 return;
             }
 
+            // 123,444.555
+            // 123444.555
+            // 123444
+             // Extract value without its comma
+            String digitAndDotText = input.replace(",", "");
             if (digitAndDotText.contains(".")) {
                 // escape sequence for .
                 String[] wholeText = digitAndDotText.split("\\.");
@@ -167,7 +168,8 @@ public class AutoFormatEditText extends EditText {
                 if (wholeText.length > 1) {
                     sbResult.append(wholeText[1]);
                 }
-
+                // 123444.233
+                // 144155
             } else {
                 result = AutoFormatUtil.formatWithDecimal(digitAndDotText);
                 sbResult.append(result);
@@ -175,6 +177,7 @@ public class AutoFormatEditText extends EditText {
 
             newStart += ((action == ACTION_DELETE) ? 0 : 1);
 
+            int commaAmount = 0;
             // calculate comma amount in edit text
             commaAmount += AutoFormatUtil.getCommaOccurrence(result);
 
